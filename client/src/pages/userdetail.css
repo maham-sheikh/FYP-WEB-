@@ -1,0 +1,106 @@
+.useradmin-page {
+    margin-left: 250px; 
+    width: calc(100% - 250px); 
+    position: fixed;
+    margin-top: -35px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #F4F8FF; 
+    padding: 20px;
+}
+
+.useradmin-header {
+    justify-content: space-between;
+    align-items: relative;
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.useradmin-header h2 {
+    font-size: 24px;
+    color: #22285E;
+}
+
+.useradmin-breadcrumb {
+    font-size: 14px;
+    text-align: left;
+    padding: 15px;
+    background-color: #FFF;
+    border: 1px solid #EAEAEA;
+    color: #999BA0;
+    line-height: 20px;
+    margin-bottom: 20px;
+}
+
+.user-table-detail {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border: 1px solid #EAEAEA;
+    margin-bottom: 20px;
+}
+
+.user-table-detail th, .user-table-detail td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.user-table-detail th {
+    background-color: #F5F5F5;
+    color: #22285E;
+}
+
+.user-table-detail td {
+    color: #565D6D;
+    font-size: 14px;
+}
+
+.user-table-detail tbody tr:hover {
+    background-color: #F5F5F5;
+}
+
+.modifybutton, .deletebutton {
+    display: inline-block;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.modifybutton {
+    background-color: #4A90E2;
+}
+
+.modifybutton:hover {
+    background-color: #357ABD; 
+}
+
+
+.deletebutton {
+    background-color: #E94E77;
+}
+
+.deletebutton:hover {
+    background-color: #D43A5F; 
+}
+
+.user-detail-date {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #F5F5F5;
+    border-radius: 3px;
+    border: 1px solid #EAEAEA;
+    font-size: 14px;
+    color: #22285E;
+    display: inline-block;
+}
+
+.user-detail-date p {
+    margin: 0;
+}
