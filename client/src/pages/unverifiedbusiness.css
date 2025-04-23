@@ -1,0 +1,170 @@
+.business-page {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  padding: 20px;
+  margin-top: -10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #FFFFFF;
+}
+
+.business-header {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.business-header h2 {
+  font-size: 24px;
+  color: #22285E;
+  margin-top: 10px;
+}
+
+.business-breadcrumb {
+  font-size: 14px;
+  text-align: left;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  color: #999BA0;
+  margin-bottom: 20px;
+}
+
+.search-filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  padding: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Table Styles */
+.business-table-container {
+  overflow-x: auto;
+  background-color: #FFFFFF;
+}
+
+.business-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #FFFFFF;
+  border: 1px solid #EAEAEA;
+}
+
+.business-table th,
+.business-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  background-color: #FFFFFF;
+}
+
+.business-table th {
+  background-color: #f4f4f4;
+}
+
+/* Action Buttons */
+.approve-button {
+  padding: 6px 12px;
+  margin: 2px;
+  border: none;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+.reject-button {
+  padding: 6px 12px;
+  margin: 2px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f44336;
+  color: white;
+  cursor: pointer;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #f4f4f4;
+}
+
+.pagination button.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .business-page {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .business-table-container {
+    overflow-x: auto;
+  }
+
+  .business-table {
+    font-size: 14px;
+  }
+
+  .business-table th,
+  .business-table td {
+    padding: 8px;
+  }
+
+  .search-filter-section {
+    flex-direction: column;
+  }
+
+  .search-bar input {
+    width: 100%;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+  }
+
+  .pagination button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .business-table th,
+  .business-table td {
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .pagination button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
