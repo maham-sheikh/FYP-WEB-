@@ -15,7 +15,7 @@ const VerifiedBusinesses = () => {
   useEffect(() => {
     const fetchVerifiedBusinesses = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/business/verified');
+        const response = await axios.get('http://192.168.18.244:8000/api/business/verified');
         setVerifiedBusinessesData(response.data);
         setFilteredBusinesses(response.data);
         setLoading(false);

@@ -21,7 +21,7 @@ const User = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/users');
+      const response = await fetch('http://192.168.18.244:8000/api/users');
       const data = await response.json();
       setUsers(data);
       setFilteredUsers(data);
@@ -55,7 +55,7 @@ const User = () => {
 
   const handleAddUser = async (newUser) => {
     try {
-      const response = await fetch('http://localhost:8000/api/users', {
+      const response = await fetch('http://192.168.18.244:8000/api/users', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const User = () => {
 
   const handleDeleteUser = async (userId) => {
     try {
-      await fetch(`http://localhost:8000/api/users/${userId}`, {
+      await fetch(`http://192.168.18.244:8000/api/users/${userId}`, {
         method: 'DELETE',
       });
       const updatedUsers = users.filter((user) => user.id !== userId);
@@ -91,7 +91,7 @@ const User = () => {
 
   const handleUpdateUser = async (updatedUser) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/users/${editingUser.id}`, {
+      const response = await fetch(`http://192.168.18.244:8000/api/users/${editingUser.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
