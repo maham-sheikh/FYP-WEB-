@@ -13,7 +13,7 @@ const UnverifiedBusinesses = () => {
   useEffect(() => {
     const fetchUnverifiedBusinesses = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/business/unverified');
+        const response = await axios.get('http://192.168.18.244:8000/api/business/unverified');
         setUnverifiedBusinessesData(response.data);
         setFilteredBusinesses(response.data);
       } catch (error) {
@@ -39,7 +39,7 @@ const UnverifiedBusinesses = () => {
 
   const handleApprove = async (businessId) => {
     try {
-      await axios.put('http://localhost:8000/api/business/approve', { id: businessId });
+      await axios.put('http://192.168.18.244:8000/api/business/approve', { id: businessId });
 
       const updatedList = unverifiedBusinessesData.map((business) =>
         business.id === businessId ? { ...business, status: 'approved' } : business
@@ -54,7 +54,7 @@ const UnverifiedBusinesses = () => {
 
   const handleReject = async (businessId) => {
     try {
-      await axios.put('http://localhost:8000/api/business/reject', { id: businessId });
+      await axios.put('http://192.168.18.244:8000/api/business/reject', { id: businessId });
 
       const updatedList = unverifiedBusinessesData.map((business) =>
         business.id === businessId ? { ...business, status: 'rejected' } : business
