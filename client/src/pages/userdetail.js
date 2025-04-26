@@ -11,7 +11,7 @@ const users = [
     { id: 105, name: 'Hailey John', email: 'hailey.john@gmail.com', phone: '03339880497', role: 'Customer' },
 ];
 
-const UserDetail = () => {
+const UserDetail = () => {  //details 
     const { id } = useParams(); 
     const user = users.find(u => u.id.toString() === id); 
 
