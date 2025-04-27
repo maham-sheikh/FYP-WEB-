@@ -81,13 +81,18 @@ const UnverifiedBusinesses = () => {
         <div className="business-header">
           <h2>Unverified Businesses</h2>
         </div>
-        <div className="search-filter-section">
-          <input
-            type="text"
-            placeholder="Search businesses..."
-            value={searchTerm}
-            onChange={handleSearch}
-          />
+        <div className="business-breadcrumb">
+          <span>Home / Admin / Business / Verified</span>
+        </div>
+       <div className="search-filter-section">
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search businesses..."
+              value={searchTerm}
+              onChange={handleSearch}
+            />
+          </div>
         </div>
         <div className="business-table-container">
           <table className="business-table">
