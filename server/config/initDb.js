@@ -151,6 +151,7 @@ const createTables = async () => {
           customer_location JSON NOT NULL,
           vendor_location JSON NOT NULL,
           status ENUM('pending', 'accepted', 'rejected', 'completed') DEFAULT 'pending',
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
           FOREIGN KEY (vendor_id) REFERENCES vendors(id) ON DELETE CASCADE,
           FOREIGN KEY (customer_id) REFERENCES customers(id) ON DELETE CASCADE
         );
@@ -163,6 +164,56 @@ const createTables = async () => {
   } catch (error) {
     console.error('Error creating tables:', error);
   }
+  const [reviewsTable] = await db.query(`
+    SELECT table_name
+    FROM information_schema.tables
+    WHERE table_schema = 'findigo2' AND table_name = 'reviews'
+  `);
+  
+  if (reviewsTable.length === 0) {
+    await db.query(`
+      CREATE TABLE reviews (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        vendorId INT NOT NULL,
+        customerId INT NOT NULL,
+        rating DECIMAL(2,1) NOT NULL,
+        comment TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (vendorId) REFERENCES vendors(id) ON DELETE CASCADE,
+        FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE
+      );
+    `);
+    console.log('Reviews table created successfully.');
+  } else {
+    console.log('Reviews table already exists.');
+  }
+  const [complaintsTable] = await db.query(`
+    SELECT table_name
+    FROM information_schema.tables
+    WHERE table_schema = 'findigo2' AND table_name = 'complaints'
+  `);
+  
+  if (complaintsTable.length === 0) {
+    await db.query(`
+      CREATE TABLE complaints (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        vendorId INT NOT NULL,
+        customerId INT NOT NULL,
+        serviceId INT NOT NULL,
+        message TEXT NOT NULL,
+        status ENUM('unresolved', 'resolved') DEFAULT 'unresolved',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (vendorId) REFERENCES vendors(id) ON DELETE CASCADE,
+        FOREIGN KEY (customerId) REFERENCES customers(id) ON DELETE CASCADE
+      );
+    `);
+    console.log('Complaints table created successfully.');
+  } else {
+    console.log('Complaints table already exists.');
+  }
+    
 };
+
+
 
 module.exports = createTables;
