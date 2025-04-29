@@ -65,7 +65,7 @@ const VerifiedBusinesses = () => {
 
         <div className="search-filter-section">
           <div className="search-bar">
-            <input
+            <input 
               type="text"
               placeholder="Search businesses..."
               value={searchTerm}
