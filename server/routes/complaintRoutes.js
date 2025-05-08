@@ -3,9 +3,7 @@ const router = express.Router();
 const complaintController = require('../controllers/complaintController');
 
 router.post('/', complaintController.submitComplaint);
-
 router.get('/unresolved', complaintController.getUnresolvedComplaints);
-
 router.get('/resolved', complaintController.getResolvedComplaints);
 
 router.put('/resolve', complaintController.resolveComplaint);

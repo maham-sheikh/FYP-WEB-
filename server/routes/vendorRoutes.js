@@ -2,10 +2,11 @@ const express = require("express");
 const db = require("../config/db");
 const router = express.Router();
 
+// GET Vendor Profile
 router.get("/profile", async (req, res) => {
   try {
     const vendorId = req.query.id;
-    
+
     if (!vendorId) {
       return res.status(400).json({ status: "error", message: "Vendor ID is required" });
     }
@@ -16,8 +17,12 @@ router.get("/profile", async (req, res) => {
         v.email, 
         v.phone, 
         v.businessCategory, 
-        v.subService
+        v.subService,
+        v.price,
+        vl.business_name,
+        vl.working_hours
       FROM vendors v
+      LEFT JOIN vendor_locations vl ON v.id = vl.vendor_id
       WHERE v.id = ?
     `;
 
@@ -38,6 +43,7 @@ router.get("/profile", async (req, res) => {
   }
 });
 
+// POST Vendor Login
 router.post("/login", async (req, res) => {
   const { phone, password } = req.body;
 
@@ -46,12 +52,8 @@ router.post("/login", async (req, res) => {
   }
 
   try {
-
     const query = "SELECT * FROM vendors WHERE phone = ?";
-
     const [results] = await db.query(query, [phone]);
-
-    console.log("Database query results:", results);
 
     if (results.length === 0) {
       return res.status(401).json({ status: "error", message: "Invalid phone or password" });
@@ -70,7 +72,7 @@ router.post("/login", async (req, res) => {
     return res.status(200).json({
       status: "success",
       message: "Login successful",
-      vendor: { id: vendor.id, phone: vendor.phone, name: vendor.name },
+      vendor: { id: vendor.id, phone: vendor.phone, name: vendor.fullName },
     });
 
   } catch (error) {
@@ -78,5 +80,33 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ status: "error", message: "Internal server error" });
   }
 });
+
+// PUT Update Vendor Price
+// router.put("/profile/update-price", async (req, res) => {
+//   const { vendorId, newPrice } = req.body;
+
+//   if (!vendorId || newPrice === undefined) {
+//     return res.status(400).json({ status: "error", message: "Vendor ID and new price are required." });
+//   }
+
+//   try {
+//     const updateQuery = `
+//       UPDATE vendors
+//       SET price = ?
+//       WHERE id = ?
+//     `;
+//     const [result] = await db.query(updateQuery, [newPrice, vendorId]);
+
+//     if (result.affectedRows === 0) {
+//       return res.status(404).json({ status: "error", message: "Vendor not found." });
+//     }
+
+//     return res.status(200).json({ status: "success", message: "Price updated successfully." });
+
+//   } catch (error) {
+//     console.error("Error updating price:", error);
+//     res.status(500).json({ status: "error", message: "Internal server error" });
+//   }
+// });
 
 module.exports = router;

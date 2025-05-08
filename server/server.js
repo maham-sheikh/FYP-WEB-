@@ -12,6 +12,8 @@ const vendorRoutes = require('./routes/vendorRoutes');
 const vendorLocationRoutes = require('./routes/vendorLocationRoutes');
 const customerRoutes = require('./routes/customerRoutes');
 const requestRoutes = require('./routes/requestRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+const complaintRoutes = require('./routes/complaintRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -28,6 +30,9 @@ app.use('/api/vendor', vendorRoutes);
 app.use('/api/location', vendorLocationRoutes);
 app.use('/api/customer', customerRoutes);
 app.use('/api', requestRoutes);
+
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/complaints', complaintRoutes);
 
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err.stack);
@@ -49,7 +54,7 @@ const initDb = require('./config/initDb');
 })();
 
 
-const HOST = "192.168.100.148";
+const HOST = "192.168.18.244";
 const server = app.listen(PORT, () => {
   console.log(`Server is running on http://${HOST}:${PORT}`);
 });
