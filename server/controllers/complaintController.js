@@ -22,42 +22,60 @@ exports.submitComplaint = async (req, res) => {
   }
 };
 
-// Get unresolved complaints
-exports.getunresolvedcomplaint = async (req, res) => {
+// Fetch unresolved complaints
+exports.getUnresolvedComplaints = async (req, res) => {
   try {
     const [rows] = await db.query(`SELECT * FROM complaints WHERE status = 'unresolved'`);
     res.status(200).json(rows);
   } catch (err) {
+    console.error('Error fetching unresolved complaints:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
-exports.getresolvedcomplaint = async (req, res) => {
+// Fetch resolved complaints
+exports.getResolvedComplaints = async (req, res) => {
   try {
     const [rows] = await db.query(`SELECT * FROM complaints WHERE status = 'resolved'`);
     res.status(200).json(rows);
   } catch (err) {
+    console.error('Error fetching resolved complaints:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
-
-exports.resolvecomplaint = async (req, res) => {
+// Mark complaint as resolved
+exports.resolveComplaint = async (req, res) => {
   try {
     const { complaintId } = req.body;
     await db.query(`UPDATE complaints SET status = 'resolved' WHERE id = ?`, [complaintId]);
-    res.status(200).json({ message: 'Complaint marked resolved' });
+    res.status(200).json({ message: 'Complaint marked as resolved.' });
   } catch (err) {
+    console.error('Error resolving complaint:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
-exports.pendingcomplaint = async (req, res) => {
+// Mark complaint back to pending (unresolved)
+exports.pendingComplaint = async (req, res) => {
   try {
     const { complaintId } = req.body;
     await db.query(`UPDATE complaints SET status = 'unresolved' WHERE id = ?`, [complaintId]);
-    res.status(200).json({ message: 'Complaint marked pending' });
+    res.status(200).json({ message: 'Complaint marked as pending.' });
   } catch (err) {
+    console.error('Error marking complaint pending:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Delete complaint
+exports.deleteComplaint = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await db.query(`DELETE FROM complaints WHERE id = ?`, [id]);
+    res.status(200).json({ message: 'Complaint deleted successfully.' });
+  } catch (err) {
+    console.error('Error deleting complaint:', err);
     res.status(500).json({ message: 'Server error' });
   }
 };
